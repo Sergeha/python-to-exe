@@ -1,6 +1,7 @@
 name: Build EXE with PyInstaller
 
-on: [push]
+on:
+  workflow_dispatch: # Позволяет вручную запускать workflow
 
 jobs:
   build:
@@ -8,7 +9,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4  # Обновленный checkout action
 
       - name: Set up Python
         uses: actions/setup-python@v4
@@ -22,7 +23,7 @@ jobs:
         run: pyinstaller --onefile --hidden-import=database main.py
 
       - name: Upload EXE as artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4  # Обновленный upload-artifact action
         with:
           name: main-exe
           path: dist/main.exe
